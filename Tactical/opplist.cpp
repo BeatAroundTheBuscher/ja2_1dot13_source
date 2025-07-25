@@ -5326,8 +5326,8 @@ void DebugSoldierPage4( )
 //
 
 #define MAX_MOVEMENT_NOISE 9
-#define VEHICLE_FAST_MOVEMENT_NOISE 25
-#define VEHICLE_NORMAL_MOVEMENT_NOISE 15
+#define VEHICLE_FAST_MOVEMENT_NOISE 50
+#define VEHICLE_NORMAL_MOVEMENT_NOISE 30
 
 UINT8 MovementNoise(SOLDIERTYPE *pSoldier)
 {
@@ -5335,6 +5335,7 @@ UINT8 MovementNoise(SOLDIERTYPE *pSoldier)
 	INT16	sMaxVolume, sVolume;
 	INT8	bBandaged, bEffLife;
 
+	CHAR16 myString[128];
 	// anv: vehicle and passengers
 	if (pSoldier->flags.uiStatusFlags & (SOLDIER_DRIVER | SOLDIER_PASSENGER))
 	{
@@ -5345,10 +5346,14 @@ UINT8 MovementNoise(SOLDIERTYPE *pSoldier)
 		if (pSoldier->usAnimState == RUNNING)
 		{
 			// driving fast makes engine work louder
+			ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"MovementNoise - VEHICLE_FAST_MOVEMENT_NOISE: %d", VEHICLE_FAST_MOVEMENT_NOISE);
+			swprintf( myString, L"MovementNoise - VEHICLE_FAST_MOVEMENT_NOISE: %d", VEHICLE_FAST_MOVEMENT_NOISE);
 			return(VEHICLE_FAST_MOVEMENT_NOISE);
 		}
 		else
 		{
+			ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"MovementNoise - VEHICLE_NORMAL_MOVEMENT_NOISE: %d", VEHICLE_NORMAL_MOVEMENT_NOISE);
+			swprintf( myString, L"MovementNoise - VEHICLE_NORMAL_MOVEMENT_NOISE: %d", VEHICLE_NORMAL_MOVEMENT_NOISE);
 			return(VEHICLE_NORMAL_MOVEMENT_NOISE);
 		}
 	}
@@ -5910,6 +5915,7 @@ void ProcessNoise(UINT8 ubNoiseMaker, INT32 sGridNo, INT8 bLevel, UINT8 ubTerrTy
 					// giving him a message about the noise it made, he's obviously aware.
 					if (1 /*PublicBullet*/)
 					{
+						ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"bTellPlayer 2 - Grenade");
 						bTellPlayer = FALSE;
 					}
 
@@ -5920,12 +5926,14 @@ void ProcessNoise(UINT8 ubNoiseMaker, INT32 sGridNo, INT8 bLevel, UINT8 ubTerrTy
 					// noise, because the player is already watching the thing go BOOM!
 					if (TeamMemberNear(bTeam,sGridNo,STRAIGHT))
 					{
+						ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"bTellPlayer 3 - Explosion");
 						bTellPlayer = FALSE;
 					}
 					break;
 
 				case NOISE_SILENT_ALARM:
 				case NOISE_CREAKING://shadooow: doors will make sound of being opened/closed so I see no reason to write it to player
+					ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"bTellPlayer 4 - Creaking");
 					bTellPlayer = FALSE;
 					break;
 			}
@@ -5939,6 +5947,7 @@ void ProcessNoise(UINT8 ubNoiseMaker, INT32 sGridNo, INT8 bLevel, UINT8 ubTerrTy
 					(gbPublicOpplist[bTeam][ubNoiseMaker] == HEARD_THIS_TURN))	// heard this turn
 				{
 					// then don't bother reporting any noise made by him to the player
+					ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"bTellPlayer 5 - heard or seen");
 					bTellPlayer = FALSE;
 				}
 				/*
@@ -5951,12 +5960,14 @@ void ProcessNoise(UINT8 ubNoiseMaker, INT32 sGridNo, INT8 bLevel, UINT8 ubTerrTy
 				// anv: special exception: we want to report enemy taunt, because of text content
 				if ( ubNoiseType == NOISE_VOICE )
 				{
+					ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"bTellPlayer 6 - Noise");
 					bTellPlayer = TRUE;
 				}
 
 				if ( MercPtrs[ ubNoiseMaker ]->stats.bLife == 0 )
 				{
 					// this guy is dead (just dying) so don't report to player
+					ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"bTellPlayer 7 - Dead");
 					bTellPlayer = FALSE;
 				}
 
@@ -6167,6 +6178,7 @@ void ProcessNoise(UINT8 ubNoiseMaker, INT32 sGridNo, INT8 bLevel, UINT8 ubTerrTy
 				{
 					// the merc that heard it the LOUDEST is the one to comment
 					// should add level to this function call
+					ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"ProcessNoise - TellPlayerAboutNoise");
 					TellPlayerAboutNoise(MercPtrs[ubHeardLoudestBy],ubNoiseMaker,sGridNo,bLevel,ubLoudestEffVolume,ubNoiseType, ubLoudestNoiseDir, zNoiseMessage);
 
 					if ( ubNoiseType == NOISE_MOVEMENT)
@@ -7349,6 +7361,8 @@ void NoticeUnseenAttacker( SOLDIERTYPE * pAttacker, SOLDIERTYPE * pDefender, INT
 	BOOLEAN fSeesAttacker = FALSE;
 	INT8		bDirection;
 	BOOLEAN	fMuzzleFlash = FALSE;
+
+    ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"opplist - NoticeUnseenAttacker");
 
 	if (!(gTacticalStatus.uiFlags & INCOMBAT))
 	{

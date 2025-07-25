@@ -4790,7 +4790,6 @@ BOOLEAN ValidOpponent(SOLDIERTYPE* pSoldier, SOLDIERTYPE* pOpponent)
 		CONSIDERED_NEUTRAL(pSoldier, pOpponent) ||
 		pSoldier->bSide == pOpponent->bSide ||
 		pSoldier->aiData.bAttitude == ATTACKSLAYONLY && pOpponent->ubProfile != SLAY ||
-		(pOpponent->ubWhatKindOfMercAmI == MERC_TYPE__VEHICLE && GetNumberInVehicle(pOpponent->bVehicleID) == 0) ||
 		gTacticalStatus.bBoxingState == BOXING && (pSoldier->flags.uiStatusFlags & SOLDIER_BOXER) && !(pOpponent->flags.uiStatusFlags & SOLDIER_BOXER) ||
 		pOpponent->ubBodyType == CROW)
 	{

@@ -4547,7 +4547,13 @@ void HandleExplosionWarningAnimations( )
 					usColor = Get16BPPColor(FROMRGB(96, 96, 96));
 					sRadius = (INT32)(sqrt(0.5) * (20));
 
-					if (bLevel > 0)
+					//BUSCHER: Vehicle could go here as its own circle
+					if (pOpponent->ubWhatKindOfMercAmI == MERC_TYPE__VEHICLE) // && GetNumberInVehicle(pOpponent->bVehicleID) == 0)
+					{
+						usColor = Get16BPPColor(FROMRGB(255, 0, 0));
+						DrawTraitRadius(sSpot, bLevel, sRadius + 10, 2, usColor);
+					}
+					else if (bLevel > 0)
 					{
 						DrawTraitRadius(sSpot, bLevel, sRadius, 2, usColor);
 						DrawTraitRadius(sSpot, bLevel, sRadius + 4, 2, usColor);

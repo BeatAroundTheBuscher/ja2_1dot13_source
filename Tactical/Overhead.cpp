@@ -2898,7 +2898,7 @@ BOOLEAN HandleAtNewGridNo( SOLDIERTYPE *pSoldier, BOOLEAN *pfKeepMoving )
 
     if ( !(gTacticalStatus.uiFlags & LOADING_SAVED_GAME ) )
     {
-        ubVolume = MovementNoise( pSoldier );
+        ubVolume = MovementNoise( pSoldier ); // BUSCHER: tank returns 15
         if (ubVolume > 0)
         {
             MakeNoise( pSoldier->ubID, pSoldier->sGridNo, pSoldier->pathing.bLevel, pSoldier->bOverTerrainType, ubVolume, NOISE_MOVEMENT );
@@ -9776,6 +9776,7 @@ SOLDIERTYPE *InternalReduceAttackBusyCount( )
             {
                 if (pTarget->aiData.bOppList[ pSoldier->ubID ] != SEEN_CURRENTLY )
                 {
+                    ScreenMsg(FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"Overhead - InternalReduceAttackBusyCount");
                     NoticeUnseenAttacker( pSoldier, pTarget, 0 );
                 }
                 // "under fire" lasts for 2 turns
