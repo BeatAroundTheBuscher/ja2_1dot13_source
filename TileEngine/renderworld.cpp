@@ -1680,7 +1680,13 @@ void RenderTiles(UINT32 uiFlags, INT32 iStartPointX_M, INT32 iStartPointY_M, INT
 
 										if (!(uiFlags&TILES_DIRTY))
 										{
-											hVObject->pShadeCurrent = hVObject->pShades[pNode->ubShadeLevel];
+											// BUSCHER - Enable Player NV as a visual effect only
+											// currently there is no redrawing enforced when the mode is toggled
+											if (gGameSettings.fOptions[TOPTION_TOGGLE_PLAYER_NIGHT_VISION])
+												// also this is nice and all but the shade is ignored
+												hVObject->pShadeCurrent = Create16BPPPaletteShaded(hVObject->pPaletteEntry, 160, 255, 160, TRUE);
+											else
+												hVObject->pShadeCurrent = hVObject->pShades[pNode->ubShadeLevel];
 											hVObject->pShade8 = ubColorTables[pNode->ubShadeLevel];
 										}
 

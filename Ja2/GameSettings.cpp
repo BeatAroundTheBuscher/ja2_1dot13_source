@@ -361,6 +361,7 @@ BOOLEAN LoadGameSettings()
 		gGameSettings.fOptions[TOPTION_QUIET_TRAINING]					= iniReader.ReadBoolean("JA2 Game Settings","TOPTION_QUIET_TRAINING"				   ,  FALSE );
 		gGameSettings.fOptions[TOPTION_QUIET_REPAIRING]					= iniReader.ReadBoolean("JA2 Game Settings","TOPTION_QUIET_REPAIRING"				   ,  FALSE );
 		gGameSettings.fOptions[TOPTION_QUIET_DOCTORING]					= iniReader.ReadBoolean("JA2 Game Settings","TOPTION_QUIET_DOCTORING"				   ,  FALSE );
+		gGameSettings.fOptions[TOPTION_TOGGLE_PLAYER_NIGHT_VISION]		= iniReader.ReadBoolean("JA2 Game Settings","TOPTION_TOGGLE_PLAYER_NIGHT_VISION"	   ,  FALSE );
 		
 		if (!is_networked)
 			gGameSettings.fOptions[TOPTION_AUTO_FAST_FORWARD_MODE]		= iniReader.ReadBoolean("JA2 Game Settings","TOPTION_AUTO_FAST_FORWARD_MODE"           ,  FALSE );
@@ -618,6 +619,7 @@ BOOLEAN	SaveGameSettings()
 		settings << "TOPTION_SHOW_ENEMY_LOCATION			  = " << (gGameSettings.fOptions[TOPTION_SHOW_ENEMY_LOCATION]				?	 "TRUE" : "FALSE" ) << endl;
 		settings << "TOPTION_ALT_START_AIM					  = " << (gGameSettings.fOptions[TOPTION_ALT_START_AIM]						?	 "TRUE" : "FALSE") << endl;
 		settings << "TOPTION_ALT_PATHFINDING				  = " << (gGameSettings.fOptions[TOPTION_ALT_PATHFINDING]					?	 "TRUE" : "FALSE") << endl;
+		settings << "TOPTION_TOGGLE_PLAYER_NIGHT_VISION		  = " << (gGameSettings.fOptions[TOPTION_TOGGLE_PLAYER_NIGHT_VISION]					?	 "TRUE" : "FALSE") << endl;
 
 		settings << "TOPTION_CHEAT_MODE_OPTIONS_HEADER        = " << (gGameSettings.fOptions[TOPTION_CHEAT_MODE_OPTIONS_HEADER]			?    "TRUE" : "FALSE" ) << endl;
 		settings << "TOPTION_FORCE_BOBBY_RAY_SHIPMENTS        = " << (gGameSettings.fOptions[TOPTION_FORCE_BOBBY_RAY_SHIPMENTS]			?    "TRUE" : "FALSE" ) << endl;
@@ -848,6 +850,9 @@ void InitGameSettings()
 	gGameSettings.fOptions[TOPTION_SHOW_ENEMY_LOCATION]					= FALSE;	// sevenfm: show locations of known enemies
 	gGameSettings.fOptions[TOPTION_ALT_START_AIM]						= FALSE;
 	gGameSettings.fOptions[TOPTION_ALT_PATHFINDING]						= FALSE;
+
+	// Buscher
+	gGameSettings.fOptions[TOPTION_TOGGLE_PLAYER_NIGHT_VISION]			= FALSE;
 
 	// arynn: Cheat/Debug Menu
 	gGameSettings.fOptions[ TOPTION_CHEAT_MODE_OPTIONS_HEADER ]			= FALSE;	

@@ -238,6 +238,7 @@ void ChangeSoldiersBodyType( UINT8 ubBodyType, BOOLEAN fCreateNewPalette );
 void TeleportSelectedSoldier();
 void ToggleTurnMode();// ary-05/05/2009 : add forced turn mode
 void ToggleTreeTops();
+void TogglePlayerNightVision();
 void ToggleZBuffer();
 void TogglePlanningMode();
 void SetBurstMode();
@@ -4193,7 +4194,10 @@ void GetKeyboardInput( UINT32 *puiNewEvent )
 			case 'n':
 				if ( !AreInMeanwhile() )
 				{
-					if ( fAlt )
+					if ( fAlt && fCtrl)
+						TogglePlayerNightVision();
+
+					else if ( fAlt )
 					{
 						static UINT16 gQuoteNum = 0;
 
@@ -4566,8 +4570,6 @@ void GetKeyboardInput( UINT32 *puiNewEvent )
 					ToggleTrapNetworkView();	// added by Flugente
 				else
 					ToggleMercView();
-
-				break;
 
 			case 'w':
 				if ( fCtrl && fAlt )
@@ -5316,6 +5318,23 @@ void ToggleTreeTops()
 		WorldShowTrees( );
 		gGameSettings.fOptions[TOPTION_TOGGLE_TREE_TOPS] = TRUE;
 		gTacticalStatus.uiFlags &= (~NOHIDE_REDUNDENCY);
+	}
+
+	// FOR THE NEXT RENDER LOOP, RE-EVALUATE REDUNDENT TILES
+	InvalidateWorldRedundency( );
+}
+
+void TogglePlayerNightVision()
+{
+	if ( gGameSettings.fOptions[ TOPTION_TOGGLE_PLAYER_NIGHT_VISION ] )
+	{
+		ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, TacticalStr[ REMOVING_PLAYER_NIGHT_VISION_STR ] );
+		gGameSettings.fOptions[TOPTION_TOGGLE_PLAYER_NIGHT_VISION] = FALSE;
+	}
+	else
+	{
+		ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, TacticalStr[ SHOWING_PLAYER_NIGHT_VISION_STR ]);
+		gGameSettings.fOptions[TOPTION_TOGGLE_PLAYER_NIGHT_VISION] = TRUE;
 	}
 
 	// FOR THE NEXT RENDER LOOP, RE-EVALUATE REDUNDENT TILES
