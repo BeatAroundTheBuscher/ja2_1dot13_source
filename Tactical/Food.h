@@ -50,7 +50,7 @@ typedef struct
 {
 	UINT16		uiIndex;	
 	CHAR16		szName[80];				// name of this food
-	INT32		bFoodPoints;			// points that will be added to our drink level
+	INT32		bFoodPoints;			// points that will be added to our food level
 	INT32		bDrinkPoints;			// points that will be added to our drink level
 	FLOAT		usDecayRate;			// rate at which food decays
 } FOODTYPE;

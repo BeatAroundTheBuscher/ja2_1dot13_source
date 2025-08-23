@@ -698,8 +698,14 @@ void EatFromInventory( SOLDIERTYPE *pSoldier, BOOLEAN fcanteensonly )
 				}
 				else
 				{
+					// buscher
+					// only use drug items in the second loop (f. ex. Energy drinks)
+					if ( Item[pObj->usItem].drugtype != 0 )
+						continue;
+
 					// omit non-degrading food (save it for later!)
-					if ( Food[foodtype].usDecayRate <= 0.0f )
+					// Water in PET bottles and such have a decay rate of 0
+					if ( Food[foodtype].usDecayRate <= 0.0f && Food[foodtype].bFoodPoints > 0)
 						continue;
 
 					// omit bad food (we don't like that and will eat it only if we have to)
@@ -707,6 +713,7 @@ void EatFromInventory( SOLDIERTYPE *pSoldier, BOOLEAN fcanteensonly )
 					if ( foodcondition < FOOD_BAD_THRESHOLD )
 						continue;
 
+					// we want canteen items for battles
 					if (ItemIsCanteen(pObj->usItem))
 						continue;
 				}
