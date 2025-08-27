@@ -1680,7 +1680,19 @@ void RenderTiles(UINT32 uiFlags, INT32 iStartPointX_M, INT32 iStartPointY_M, INT
 
 										if (!(uiFlags&TILES_DIRTY))
 										{
-											hVObject->pShadeCurrent = hVObject->pShades[pNode->ubShadeLevel];
+											// Enable Player NV as a visual effect only
+											// currently there is no redrawing enforced when the mode is toggled
+											// 4 = MIN_SHADE_LEVEL; 15 = MAX_SHADE_LEVEL
+											if (gGameSettings.fOptions[TOPTION_TOGGLE_PLAYER_NIGHT_VISION]
+												&& pNode->ubShadeLevel >= 4
+												&& pNode->ubShadeLevel <= 15)
+											{
+												hVObject->pShadeCurrent = hVObject->pShadesNV[pNode->ubShadeLevel - 4];
+											}
+											else
+											{
+												hVObject->pShadeCurrent = hVObject->pShades[pNode->ubShadeLevel];
+											}
 											hVObject->pShade8 = ubColorTables[pNode->ubShadeLevel];
 										}
 
@@ -2475,6 +2487,8 @@ void RenderTiles(UINT32 uiFlags, INT32 iStartPointX_M, INT32 iStartPointY_M, INT
 										{
 											if (fPixelate)
 											{
+												// This line exists because we didn't set up all for pShadesNV and the following functions will point at a non valid address otherwise
+												hVObject->pShadeCurrent = hVObject->pShades[pNode->ubShadeLevel];
 												if (fTranslucencyType)
 												{
 													//if(fZWrite)
@@ -2694,6 +2708,8 @@ void RenderTiles(UINT32 uiFlags, INT32 iStartPointX_M, INT32 iStartPointY_M, INT
 										{
 											if (fPixelate)
 											{
+												// This line exists because we didn't set up all for pShadesNV and the following functions will point at a non valid address otherwise
+												hVObject->pShadeCurrent = hVObject->pShades[pNode->ubShadeLevel];
 												if (fTranslucencyType)
 												{
 													if (fZWrite)

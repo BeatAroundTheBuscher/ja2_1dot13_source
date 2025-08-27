@@ -3504,6 +3504,16 @@ UINT32 uiCount;
 																																				gusShadeLevels[uiCount][2], FALSE);
 	}
 
+	// Set up pShades for Player Night Vision
+	// This only adds the relevant 12 shade palettes between MAX_SHADE_LEVEL and MIN_SHADE_LEVEL
+	for (int i = 0; i < 12; i++)
+	{
+		UINT8 color_r = 120 - i*8;
+		UINT8 color_g = 240 - i*16;
+		UINT8 color_b = 120 - i*8;
+		pObj->pShadesNV[i] = Create16BPPPaletteShaded(pObj->pPaletteEntry, color_r, color_g, color_b, TRUE);
+	}
+
 	return(TRUE);
 }
 

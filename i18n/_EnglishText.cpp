@@ -4116,6 +4116,9 @@ CHAR16 TacticalStr[][ MED_STRING_LENGTH ] =
 
 	L"%s has stopped chatting with %s",
 	L"Attempt to turn",
+
+	L"Enable Player NV",
+	L"Disable Player NV"
 };
 
 //Varying helptext explains (for the "Go to Sector/Map" checkbox) what will happen given different circumstances in the "exiting sector" interface.
@@ -6582,6 +6585,7 @@ STR16		zOptionsToggleText[] =
 	L"Show enemy location",					// show locator on last known enemy location
 	L"Start at maximum aim",
 	L"Alternative pathfinding",
+	L"Toggle Player NV",
 	L"--Cheat Mode Options--",				// TOPTION_CHEAT_MODE_OPTIONS_HEADER,
 	L"Force Bobby Ray Shipments",			// force all pending Bobby Ray shipments
 	L"-----------------",					// TOPTION_CHEAT_MODE_OPTIONS_END
