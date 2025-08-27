@@ -1070,16 +1070,16 @@ BOOLEAN f16BitPal;
 					hVObject->p16BPPPalette = NULL;
 			}
 
-			// 4 = MIN_SHADE_LEVEL; 15 = MAX_SHADE_LEVEL
-			if ( x >= 4 && x <= 15 && hVObject->pShadesNV[x] != NULL )
+			// 15 = MAX_SHADE_LEVEL
+			if (x <= 15 && hVObject->pShadesNV[x] != NULL )
 			{
-				if ( hVObject->pShadesNV[x-4] == hVObject->p16BPPPalette )
+				if ( hVObject->pShadesNV[x] == hVObject->p16BPPPalette )
 					f16BitPal = TRUE;
 				else
 					f16BitPal = FALSE;
 
-				MemFree( hVObject->pShadesNV[x-4] );
-				hVObject->pShadesNV[x-4] = NULL;
+				MemFree( hVObject->pShadesNV[x] );
+				hVObject->pShadesNV[x] = NULL;
 
 				if ( f16BitPal )
 					hVObject->p16BPPPalette = NULL;
@@ -1115,8 +1115,8 @@ UINT16 SetObjectShade(HVOBJECT pObj, UINT32 uiShade)
 		return(FALSE);
 	}
 
-	// 4 = MIN_SHADE_LEVEL; 15 = MAX_SHADE_LEVEL
-	if(uiShade >= 4 && uiShade <= 15 && pObj->pShadesNV[uiShade]==NULL)
+	// 15 = MAX_SHADE_LEVEL
+	if(uiShade <= 15 && pObj->pShadesNV[uiShade]==NULL)
 	{
 		DbgMessage(TOPIC_VIDEOOBJECT, DBG_LEVEL_2, String("Attempt to set night vision shade level to NULL table"));
 		return(FALSE);

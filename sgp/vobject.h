@@ -93,7 +93,7 @@ typedef struct TAG_HVOBJECT
 	ETRLEObject				*pETRLEObject;						// Object offset data etc
 	SixteenBPPObjectInfo	*p16BPPObject;
 	UINT16					*pShades[HVOBJECT_SHADE_TABLES];	// Shading tables
-	UINT16					*pShadesNV[12];						// MAX_SHADE_LEVEL (15) - MIN_SHADE_LEVEL (4) + 1
+	UINT16					*pShadesNV[16];						// MAX_SHADE_LEVEL (15) + 1
 	UINT16					*pShadeCurrent;
 	UINT16					*pGlow;								// glow highlight table
 	UINT8					*pShade8;							// 8-bit shading index table

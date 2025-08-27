@@ -3506,17 +3506,16 @@ UINT32 uiCount;
 
 	// Set up pShades for Player Night Vision
 	// Sanity check color_r, etc. They shouldn't be able to be less than zero/uint underflowed
-	if (gGameExternalOptions.usPlayerNVRedMax < 12 * gGameExternalOptions.usPlayerNVRedReducingFactor)
-		gGameExternalOptions.usPlayerNVRedReducingFactor = gGameExternalOptions.usPlayerNVRedMax / 12;
+	if (gGameExternalOptions.usPlayerNVRedMax < 16 * gGameExternalOptions.usPlayerNVRedReducingFactor)
+		gGameExternalOptions.usPlayerNVRedReducingFactor = gGameExternalOptions.usPlayerNVRedMax / 16;
 
-	if (gGameExternalOptions.usPlayerNVGreenMax < 12 * gGameExternalOptions.usPlayerNVGreenReducingFactor)
-		gGameExternalOptions.usPlayerNVGreenReducingFactor = gGameExternalOptions.usPlayerNVGreenMax / 12;
+	if (gGameExternalOptions.usPlayerNVGreenMax < 16 * gGameExternalOptions.usPlayerNVGreenReducingFactor)
+		gGameExternalOptions.usPlayerNVGreenReducingFactor = gGameExternalOptions.usPlayerNVGreenMax / 16;
 
-	if (gGameExternalOptions.usPlayerNVBlueMax < 12 * gGameExternalOptions.usPlayerNVBlueReducingFactor)
-		gGameExternalOptions.usPlayerNVBlueReducingFactor = gGameExternalOptions.usPlayerNVBlueMax / 12;
+	if (gGameExternalOptions.usPlayerNVBlueMax < 16 * gGameExternalOptions.usPlayerNVBlueReducingFactor)
+		gGameExternalOptions.usPlayerNVBlueReducingFactor = gGameExternalOptions.usPlayerNVBlueMax / 16;
 
-	// This only adds the relevant 12 shade palettes between MAX_SHADE_LEVEL and MIN_SHADE_LEVEL
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 16; i++)
 	{
 		UINT16 color_r = gGameExternalOptions.usPlayerNVRedMax - i * gGameExternalOptions.usPlayerNVRedReducingFactor;
 		UINT16 color_g = gGameExternalOptions.usPlayerNVGreenMax - i * gGameExternalOptions.usPlayerNVGreenReducingFactor;

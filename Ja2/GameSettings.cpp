@@ -1687,12 +1687,12 @@ void LoadGameExternalOptions()
 	// Buscher
 	gGameExternalOptions.ubBackPackWeightFactorForAPPenalty = iniReader.ReadInteger("Tactical Gameplay Settings", "BACKPACK_WEIGHT_FACTOR", 50, 1, 250);
 
-	gGameExternalOptions.usPlayerNVRedMax = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_RED", 300, 1, 2000);
+	gGameExternalOptions.usPlayerNVRedMax = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_RED", 400, 1, 2000);
 	gGameExternalOptions.usPlayerNVGreenMax = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_GREEN", 600, 1, 2000);
-	gGameExternalOptions.usPlayerNVBlueMax = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_BLUE", 300, 1, 2000);
-	gGameExternalOptions.usPlayerNVRedReducingFactor = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_RED_FACTOR", 15, 1, 2000);
-	gGameExternalOptions.usPlayerNVGreenReducingFactor = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_GREEN_FACTOR", 30, 1, 2000);
-	gGameExternalOptions.usPlayerNVBlueReducingFactor = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_BLUE_FACTOR", 15, 1, 2000);
+	gGameExternalOptions.usPlayerNVBlueMax = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_BLUE", 400, 1, 2000);
+	gGameExternalOptions.usPlayerNVRedReducingFactor = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_RED_FACTOR", 10, 1, 2000);
+	gGameExternalOptions.usPlayerNVGreenReducingFactor = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_GREEN_FACTOR", 15, 1, 2000);
+	gGameExternalOptions.usPlayerNVBlueReducingFactor = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_BLUE_FACTOR", 10, 1, 2000);
 	gGameExternalOptions.fPlayerNVMono = iniReader.ReadInteger("Tactical Gameplay Settings", "PLAYER_NV_MONO", FALSE);
 
 	// sevenfm
