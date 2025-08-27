@@ -1366,6 +1366,14 @@ typedef struct
 	// Buscher
 	UINT8 ubBackPackWeightFactorForAPPenalty;
 
+	UINT16 usPlayerNVRedMax;
+	UINT16 usPlayerNVGreenMax;
+	UINT16 usPlayerNVBlueMax;
+	UINT16 usPlayerNVRedReducingFactor;
+	UINT16 usPlayerNVGreenReducingFactor;
+	UINT16 usPlayerNVBlueReducingFactor;
+	BOOLEAN fPlayerNVMono;
+
 	// sevenfm: show enemy weapon above soldier in tactical
 	BOOLEAN fShowEnemyWeapon;
 	BOOLEAN fShowEnemyExtendedInfo;
